@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET','/ajax',true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){//状态变成4表示响应已经完全接收
+            if(xhr.status == 200){//如果状态码是200的话
+                console.log(xhr.responseText);//成功处理
+            }else{//失败了
+                console.error(xhr.responseText);//失败的处理
+            }
+        }
+    }
+    xhr.send();
+    //----------------------------------
+    function ajax(){
+
+    }
+    ajax({
+        url:'/ajax',
+        method:'get'
+    }).then(function(data){
+        console.log(data);
+    },function(error){
+        console.error(error);
+    })
+</script>
+</body>
+</html>
