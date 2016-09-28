@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul id="content">
+
+</ul>
+<script>
+    //构建一个用户数组
+    var users = [{id:1,name:'zpfx1'},{id:2,name:'zpfx2'}
+        ,{id:3,name:'zpfx3'}];
+    //声明一个空字符串
+    var str = `<li>${users[0].id}:${users[0].name}</li><li>${users[1].id}:${users[1].name}</li><li>${users[2].id}:${users[2].name}</li>`;
+    //迭代数组中的每个元素
+    /*users.forEach(function(item){
+        let {id,name} = item;
+        //把每个元素转成li字符串追加到str里面
+        str +=`<li>
+                 ${id}:${name}
+               </li>`;
+    });*/
+    //把拼接好的字符串放在ul的内部
+    document.getElementById('content').innerHTML = str;
+</script>
+
+</body>
+</html>
