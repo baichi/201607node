@@ -21,13 +21,28 @@
     }
     xhr.send();
     //----------------------------------
-    function ajax(){
-
+    function ajax(path) {
+        return new Promise(function (resolve,reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET',path,true);
+            xhr.dataType = 'json';//指定返回类型
+            //设置请求体的类型是json-> JSON.parse
+            //如果请求是表单 key=value&key2=value2  querystring.parse()
+            xhr.setRequestHeader('Content-type','application/json');
+            xhr.onreadystatechange = function () {
+                if(xhr.readyState == 4){
+                    if(xhr.status == 200){
+                        // xhr.response xhr.responseText
+                        resolve(xhr.response);
+                    }else{
+                        reject(xhr.status)
+                    }
+                }
+            };
+            xhr.send();
+        });
     }
-    ajax({
-        url:'/ajax',
-        method:'get'
-    }).then(function(data){
+    ajax('/ajax').then(function(data){
         console.log(data);
     },function(error){
         console.error(error);
