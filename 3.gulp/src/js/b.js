@@ -1,3 +1,1 @@
-var add = function(anum,bnum){
-    return anum+bnum;
-}
+alert(add(1,2));

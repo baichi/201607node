@@ -1,1 +1,3 @@
-alert(add(1,2));
+var add = (anum,bnum) => {
+    return anum+bnum;
+}

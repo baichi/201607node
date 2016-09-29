@@ -33,6 +33,8 @@ gulp.task('watch',function(){
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var plumber = require('gulp-plumber');
+var babel = require('gulp-babel');
 /**
  * gulp中的流不是普通的流，而是文件对象流
  * 对象里有文件的文件名 文件的内容
@@ -40,6 +42,8 @@ var rename = require('gulp-rename');
 gulp.task('scripts', function() {
     var path = './src/js/all.js';
     return gulp.src('./src/js/*.js')
+        .pipe(plumber())
+        .pipe(babel({presets:['es2015']}))
         .pipe(concat('all.js'))
         .pipe(gulp.dest('./build/js/'))
         .pipe(uglify())
@@ -48,7 +52,30 @@ gulp.task('scripts', function() {
         }))
         .pipe(gulp.dest('./build/js/'));
 });
-
-gulp.task('inject',function(){
-
+/**
+ * 修改src/index.html文件
+ * 用all.min.js all.min.css 替换掉原来的占位符
+ */
+var inject = require('gulp-inject');
+gulp.task('inject', function () {
+    var target = gulp.src('./src/index.html');
+    var sources = gulp.src(['build/js/*.min.js', 'build/css/*.min.css'], {read: false});
+    return target.pipe(inject(sources,{relative:true,ignorePath:'../build/'}))
+        .pipe(gulp.dest('./build'))
+        .pipe(connect.reload())//通知浏览器自动刷新
 });
+var connect = require('gulp-connect');
+
+gulp.task('server',function(){
+    connect.server({
+        port:8080,
+        root:'./build',
+        livereload:true //启动实时刷新浏览器的功能
+    });
+});
+//监控html文件的变化
+gulp.task('watch',function(){
+    gulp.watch('./src/index.html',['inject']);
+});
+
+gulp.task('default',['server','watch']);
