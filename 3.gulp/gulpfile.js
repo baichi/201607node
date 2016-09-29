@@ -17,7 +17,7 @@ gulp.task('css', function () {
         .pipe(less())//进行编译
         .pipe(concat('all.css'))//所有的css合并成all.css
         .pipe(gulp.dest('./build/css'))//保存到css目录
-        .pipe(cleanCSS({compatibility: 'ie8'}))//压缩all.css
+        .pipe(cleanCss({compatibility: 'ie8'}))//压缩all.css
         .pipe(rename(function (path) {//重命名
             path.basename += ".min";
         }))
@@ -60,7 +60,7 @@ var inject = require('gulp-inject');
 gulp.task('inject', function () {
     var target = gulp.src('./src/index.html');
     var sources = gulp.src(['build/js/*.min.js', 'build/css/*.min.css'], {read: false});
-    return target.pipe(inject(sources,{relative:true,ignorePath:'../build/'}))
+    return target.pipe(inject(sources,{addRootSlash:false,ignorePath:'build/'}))
         .pipe(gulp.dest('./build'))
         .pipe(connect.reload())//通知浏览器自动刷新
 });
