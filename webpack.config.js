@@ -20,6 +20,14 @@ module.exports = {
                test:/\.js$/,
                //针对js结尾的文件使用babel来进行加载
                loader:'babel'
+           },
+           {
+               //文件匹配模板
+               test:/\.css$/,
+               //css-loader将css转成JS模块
+               //style-loader将这个模块作为style标签插入页面中
+               //如果有多个loader的话从右向左执行
+               loader:'style!css'
            }
        ]
     }
