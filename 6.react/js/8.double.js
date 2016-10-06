@@ -25,7 +25,7 @@ var Double = React.createClass({
         }
     },
     handleMouseOver(event){
-        event.target.style.outline = '3px dotted red';
+        event.target.style.outline = '3px dashed red';
     },
     handleMouseOut(event){
         event.target.style.outline = '';
