@@ -56,7 +56,7 @@ var userModel = mongoose.model('User', userSchema);
 /*update(condition,updateObj,options,callback){
     //1. 判断 callback是否是undefined 2.
 }*/
-userModel.update({}, {age:5},{multi:true}, function (err, doc) {//doc更新后的文档对象
+userModel.update({}, {$set:{password:''}}, function (err, doc) {//doc更新后的文档对象
     if (err)
         console.error(err);
     else
@@ -68,3 +68,24 @@ userModel.update({}, {age:5},{multi:true}, function (err, doc) {//doc更新后�
  *   update 写一个update语句，passowrd zhangsan22 年龄 增加4岁
  *   {username:'zhangsan',password:'zhangsan22',age:20}
  */
+
+/*
+userModel.update({username:'zhangsan'},{ $set:{
+    password:' zhangsan222'
+},$inc:{age:4}},function(err,results){
+    if(err){
+        console.log(err);
+    }else{
+        console.log(results);
+    }
+})
+*/
+
+userModel.remove({username:'lisi'},function(err,result){
+    if(err){
+        console.log(err);
+    }else{
+        console.log(result.result);
+    }
+});
+
