@@ -13,20 +13,25 @@ var Suggest = React.createClass({
          * 1. 缓存this
          * 2. 箭头函数
          * 3. 指定 context
+         * jquery promise功能比较多 有三种注册成功回调方法
+         * then 注册成功和失败的回调
+         * success
+         * done 
          */
-        var val = event.target.value;
-        $.ajax({
+        var val = $(event.target).val();
+        var self = this;
+        var promise = $.ajax({
             url:'http://www.baidu.com/su',//接口
             method:'GET',//请求的方法
             jsonp:'cb',//用来传送返回方法名的参数名
             dataType:'jsonp',//指定返回值的类型
             data:{wd:val},//要传输的参数
-            context:this,
-            success:function(result){
-                var words = result.s.map((item,index)=><li className="list-group-item" key={index}>{item}</li>);
-                this.setState({words});
-            }
+            context:this
+        }).then(function(result){
+            var words = result.s.map((item,index)=><li className="list-group-item" key={index}>{item}</li>);
+            self.setState({words});
         })
+        console.log(promise);
     },
     render(){
         return (
