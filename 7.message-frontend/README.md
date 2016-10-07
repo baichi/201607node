@@ -25,7 +25,6 @@ mkdir src build
     "build": "webpack"
   }
 ```
-npm run build
 
 ## 安装模块
 ```
@@ -34,9 +33,10 @@ npm install webpack --save-dev
 
 ## 模块说明
 ```
-```
-    "babel-loader": babel核心模块
+    "babel-core": babel核心模块
+    "babel-loader": babel核心加载器
     "babel-preset-react": 转义react的预设
+    "babel-preset-es2015": 转义es6的预设
     "babel-preset-stage-0": 转义es7的预设
     "bootstrap": "^3.3.6", 样式类
     "css-loader": "^0.23.1", 加载css
@@ -50,3 +50,16 @@ npm install webpack --save-dev
     "webpack": "^1.13.1", //编译打包webpack
     "webpack-dev-server": "^1.14.1" 起webpack服务
 ```
+
+## 运行脚本
+
+```
+npm run build
+```
+
+## 在build目录下新建html文件,并插入打包后的脚本
+```
+<script src="bundle.js"></script>
+```
+
+## 预览html文件
