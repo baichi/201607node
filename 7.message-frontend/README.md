@@ -63,3 +63,10 @@ npm run build
 ```
 
 ## 预览html文件
+
+## 常犯的错误
+```
+1. babelrc 文件名最前面少了一个.
+2. components而不是 comments
+3. module>loaders[]> loader:'babel'
+```

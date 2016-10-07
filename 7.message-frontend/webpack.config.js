@@ -12,6 +12,14 @@ module.exports = {
             {
                 test:/\.js$/,
                 loader:'babel'
+            },
+            {
+                test:/\.css$/,
+                loader:'style!css'
+            },
+            {
+                test:/\.(eot|woff|woff2|svg|ttf)$/,
+                loader:'url'
             }
         ]
     }
