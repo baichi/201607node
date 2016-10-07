@@ -1,5 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+mongoose.Promise = Promise;
 // 服务实例 > 数据库 > 集合 >文档
 mongoose.connect('mongodb://localhost/messages');
 var MessageSchema = new mongoose.Schema({
@@ -9,14 +11,25 @@ var MessageSchema = new mongoose.Schema({
 });
 //定义可以操作数据库的model
 var Message = mongoose.model('Message',MessageSchema);
+/*
+初始化一次就可以了
 Message.create([
     {name:'张三',content:'今天天气真好，雨好大!',createAt:new Date()},
     {name:'李四',content:'明天天气更好，下冰雹!',createAt:new Date()}
-]);
+]);*/
 var app = express();
-// messages 增加消息 查看消息 删除消息
+//解析json格式的请求体 把请求体对象放在req.body上
+app.use(bodyParser.json());
+// messages 增加消息 查看消息 删除消息 postman
 app.post('/messages',function(req,res){
-
+    var message = req.body;
+    message.createAt  = new Date();
+    //成功之后返回保存之后的文档对象
+    Message.create(message).then(function(doc){
+        res.send(doc);
+    },function(error){
+        res.send(error);
+    });
 });
 //获取全部消息
 app.get('/messages',function(req,res){
@@ -28,6 +41,12 @@ app.get('/messages',function(req,res){
 });
 //删除消息
 app.delete('/messages/:_id',function(req,res){
+    //如果删除一个文档，如果成功的话返回一个空对象
+    Message.remove({_id:req.params._id}).then(function(result){
+        res.send({});
+    },function(error){
+        res.send(error);
+    });
 
 });
 
