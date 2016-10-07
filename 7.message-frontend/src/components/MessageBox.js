@@ -13,6 +13,13 @@
  * 3. 在接口成功的回调中把保存之后的文档对象添加到messages数组中,添加之后会重新渲染页面
  * 注意：修改状态只能修改MessageBox的状态对象中的messages. 可以把MessageBox的一个方法作为属性传递给MessageForm组件。
  */
+
+/**
+ * 如何删除消息
+ * 1. 给小叉绑定点击事件，点击事件发生的时候执行回调函数
+ * 2. 在回调函数里要获得要删除的消息ID，然后传递给父组件传递给自己组件一个方法
+ * 3.在父组件的方法里调用接口把当前消息删除，并修改状态
+ */
 import React from 'react';
 import MessageList from './MessageList';
 import MessageForm from './MessageForm';
