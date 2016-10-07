@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 export default class App extends React.Component{
     render(){
         return (
@@ -11,13 +12,13 @@ export default class App extends React.Component{
                         <div>
                             <ul className="nav navbar-nav">
                                 <li>
-                                    <a href="#">首页</a>
+                                    <Link to="/home">首页</Link>
                                 </li>
                                 <li>
-                                    <a href="#">用户管理</a>
+                                    <Link to="/user">用户管理</Link>
                                 </li>
                                 <li>
-                                    <a href="#">个人设置</a>
+                                    <Link to="/profile">个人设置</Link>
                                 </li>
                             </ul>
                         </div>
