@@ -23,6 +23,11 @@ export default class App extends React.Component{
                         </div>
                     </div>
                </nav>
+                <div className="row">
+                    <div className="col-sm-12">
+                        {this.props.children}
+                    </div>
+                </div>
             </div>
         )
     }
