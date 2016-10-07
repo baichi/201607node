@@ -1,18 +1,26 @@
 import React from 'react';
 export default class MessageForm extends React.Component{
+    handleSubmit(event){
+        event.preventDefault();
+        var name = this.refs.name.value;
+        var content = this.refs.content.value;
+        this.props.add({name,content});
+        return false;
+    }
+
     render(){
         return (
-           <form className="form-horizontal" role="form">
+           <form onSubmit={this.handleSubmit.bind(this)} className="form-horizontal" role="form">
               <div className="form-group">
                   <label htmlFor="username" className="control-label col-xs-1">姓名</label>
                   <div className="col-xs-11">
-                      <input type="text" id="username" className="form-control" name="username"/>
+                      <input ref="name" type="text" id="name" className="form-control" name="name"/>
                   </div>
               </div>
                <div className="form-group">
                    <label htmlFor="content" className="control-label col-xs-1">内容</label>
                    <div className="col-xs-11">
-                       <input type="text" id="content" className="form-control" name="content"/>
+                       <input ref="content" type="text" id="content" className="form-control" name="content"/>
                    </div>
                </div>
                <div className="form-group">
