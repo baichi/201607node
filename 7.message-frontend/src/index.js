@@ -1,3 +1,5 @@
 /**
- * zhangrenyang
- */
+ * es6 来创建组件 导出导入模块
+ * webpack打包
+ **/
+
