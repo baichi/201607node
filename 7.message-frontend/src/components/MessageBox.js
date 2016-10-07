@@ -8,6 +8,7 @@
 import React from 'react';
 import MessageList from './MessageList';
 import MessageForm from './MessageForm';
+import $ from 'jquery';
 export default class MessageBox extends React.Component {
     constructor(props){
         super(props);
@@ -17,7 +18,7 @@ export default class MessageBox extends React.Component {
     }
     //调用ajax接口获取数据,
     init(){
-
+        $.get('http://localhost:3000/messages').then((messages)=> this.setState({messages}))
     }
 
     render() {
@@ -26,7 +27,7 @@ export default class MessageBox extends React.Component {
                 <h3 style={{textAlign:'center'}}>珠峰留言版</h3>
                 <div className="row">
                     <div className="col-xs-12">
-                        <MessageList></MessageList>
+                        <MessageList data={this.state.messages}></MessageList>
                     </div>
                 </div>
                 <div className="row">
