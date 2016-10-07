@@ -6,7 +6,7 @@ export default class MessageBox extends React.Component {
     render() {
         return (
             <div className="container">
-                <h3 style={{textAlign:'center'}}>珠峰留言版</h3>
+                <h3 style={{textAlign:'center'}}>珠峰留言版2</h3>
 
             </div>
         )

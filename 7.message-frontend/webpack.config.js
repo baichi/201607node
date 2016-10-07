@@ -4,6 +4,9 @@ module.exports = {
         path:'./build',
         filename:'bundle.js'
     },
+    devServer:{
+      contentBase:'./build'
+    },
     module:{
         loaders:[
             {
