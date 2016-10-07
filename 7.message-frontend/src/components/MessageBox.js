@@ -26,11 +26,14 @@ export default class MessageBox extends React.Component {
     }
     //调用ajax接口获取数据,
     init(){
-        $.get('http://localhost:3000/messages').then((messages)=> this.setState({messages}))
+        $.get("http://localhost:3000/messages").then((messages)=> this.setState({messages}))
     }
 
     addMessage(message){
-        console.log(message);
+        $.post("http://localhost:3000/messages",message).then(doc=>{
+            this.state.messages.push(doc);
+            this.setState({messages:this.state.messages});
+        });
     }
 
     render() {

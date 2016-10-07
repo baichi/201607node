@@ -7,4 +7,4 @@ require('bootstrap/dist/css/bootstrap.css');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MessageBox from './components/MessageBox';
-ReactDOM.render(<MessageBox/>,document.getElementById('app'));
+ReactDOM.render(<MessageBox url="http://localhost:3000/messages"/>,document.getElementById('app'));
