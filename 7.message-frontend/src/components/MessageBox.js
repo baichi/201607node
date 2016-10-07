@@ -25,22 +25,33 @@ import MessageList from './MessageList';
 import MessageForm from './MessageForm';
 import $ from 'jquery';
 export default class MessageBox extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         //这是es6里定义初始状态的方法
-        this.state = {messages:[]};
+        this.state = {messages: []};
         this.init();
     }
+
     //调用ajax接口获取数据,
-    init(){
+    init() {
         $.get("http://localhost:3000/messages").then((messages)=> this.setState({messages}))
     }
 
-    addMessage(message){
-        $.post("http://localhost:3000/messages",message).then(doc=>{
+    addMessage(message) {
+        $.post("http://localhost:3000/messages", message).then(doc=> {
             this.state.messages.push(doc);
-            this.setState({messages:this.state.messages});
+            this.setState({messages: this.state.messages});
         });
+    }
+
+    del(id) {
+        $.ajax({
+            url: `http://localhost:3000/messages/${id}`,
+            method: 'DELETE'
+        }).then(result=> {
+            var messages = this.state.messages.filter(item=>item._id != id);
+            this.setState({messages});
+        })
     }
 
     render() {
@@ -49,12 +60,12 @@ export default class MessageBox extends React.Component {
                 <h3 style={{textAlign:'center'}}>珠峰留言版</h3>
                 <div className="row">
                     <div className="col-xs-12">
-                        <MessageList data={this.state.messages}></MessageList>
+                        <MessageList del={this.del.bind(this)} data={this.state.messages}></MessageList>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-xs-12">
-                        <MessageForm add = {this.addMessage.bind(this)}></MessageForm>
+                        <MessageForm add={this.addMessage.bind(this)}></MessageForm>
                     </div>
                 </div>
             </div>
