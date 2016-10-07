@@ -1,5 +1,9 @@
 /**
  * es6 来创建组件 导出导入模块
- * webpack打包
+ * 1.import MessageBox组件
+ * 2. 把此组件渲染到appdiv的内部
  **/
-
+import React from 'react';
+import ReactDOM from 'react-dom';
+import MessageBox from './components/MessageBox';
+ReactDOM.render(<MessageBox/>,document.getElementById('app'));
