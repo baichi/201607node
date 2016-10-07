@@ -5,6 +5,17 @@
  * localStorage.getItem(key);
  *
  */
+var utils = {
+    list(){
+
+    },
+    add(){
+
+    },
+    save(){
+
+    }
+}
 var MessageBox = React.createClass({
     //获取初始状态
     getInitialState(){
