@@ -1,0 +1,26 @@
+module.exports = {
+    entry:'./app/index.js',//入口文件
+    output:{
+        path:'./dist',//输出目录
+        filename:'bundle.js'
+    },
+    devServer:{
+      contentBase:'./dist'//webpack-dev-server静态文件根目录指向dist目录
+    },
+    module:{
+        loaders:[
+            {
+                test:/\.js$/,
+                loader:'babel'
+            },
+            {
+                test:/\.css$/,
+                loader:'style!css'
+            },
+            {
+                test:/\.(eot|woff|woff2|svg|ttf)$/,
+                loader:'url'
+            }
+        ]
+    }
+}
