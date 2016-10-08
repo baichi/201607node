@@ -1,7 +1,8 @@
 var express = require('express');
 var path = require('path');
-var app = express();
 
+var app = express();
+app.use(express.static(__dirname));
 app.get('/',function(req,res){
     res.sendFile(path.resolve('index.html'));
 });

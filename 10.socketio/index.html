@@ -3,8 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>聊天窗口</title>
+    <link rel="stylesheet" href="public/bootstrap.css">
 </head>
 <body>
+<div class="container">
+  <div class="panel panel-success">
+      <div class="panel-heading">
+          <h3>欢迎来到珠峰聊天室</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item">张三:今天天气如何呢?</li>
+        </ul>
+      </div>
+      <div class="panel-footer">
+          <div class="row">
+              <div class="col-xs-2">
+                  姓名:<input type="text" class="form-control">
+              </div>
+              <div class="col-xs-8">
+                  内容:<input type="text" class="form-control">
+              </div>
+              <div class="col-xs-2">
+                  <button class="btn btn-primary">发言</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
 <script src="/socket.io/socket.io.js"></script>
 <script>
     window.onload = function(){
