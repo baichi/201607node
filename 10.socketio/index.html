@@ -12,17 +12,17 @@
           <h3>欢迎来到珠峰聊天室</h3>
       </div>
       <div class="panel-body">
-        <ul class="list-group">
-            <li class="list-group-item">张三:今天天气如何呢?</li>
+        <ul class="list-group" id="messages">
+
         </ul>
       </div>
       <div class="panel-footer">
           <div class="row">
               <div class="col-xs-2">
-                  姓名:<input type="text" class="form-control">
+                  姓名:<input id="name" type="text" class="form-control">
               </div>
               <div class="col-xs-8">
-                  内容:<input type="text" class="form-control">
+                  内容:<input id="content" type="text" class="form-control">
               </div>
               <div class="col-xs-2">
                   <button onclick="send()" class="btn btn-primary">发言</button>
@@ -38,14 +38,21 @@
         //当客户端连接上服务器之后执行回调函数 事件名叫connect
         socket.on('connect',function(){
             console.log('连接成功');
-            socket.send('服务器你好');
+            //socket.send('服务器你好');
         });
-        socket.on('message',function(msg){
-            console.log(msg);
+        socket.on('message',function(msgObj){
+            var ul = document.querySelector('#messages');
+            var li = document.createElement('li');
+            li.className = 'list-group-item';
+            li.innerHTML = `${msgObj.name}:${msgObj.content}`;
+            ul.appendChild(li);
         });
 
         window.send = function(){
-            socket.send({name:'张三',content:'今天天气不错'});
+            var name = document.querySelector('#name').value;
+            var content = document.querySelector('#content').value;
+            socket.send({name:name,content:content});
+            document.querySelector('#content').value = '';
         }
     }
     /**

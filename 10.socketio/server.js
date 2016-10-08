@@ -14,11 +14,11 @@ var io = require('socket.io')(server);
 //监听客户端连接事件,连接到来的时候会为每个客户端创建一个socket对象，传入函数内执行
 io.on('connection',function(socket){
     //socket.send('客户端你好');
-    socket.emit('message','客户端你好');
+    //socket.emit('message','客户端你好');
    //监听客户端发过来的消息
-   socket.on('message',function(msg){
-       console.log(msg);
-       socket.send(msg);
+   socket.on('message',function(msgObj){
+       //把收到的某个人发给服务器的消息对象发给所有的人
+      io.emit('message',msgObj);
    });
 });
 server.listen(8080,function(){
