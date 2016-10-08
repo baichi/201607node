@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="clock"></div>
+<script>
+    function send() {
+        var xhr = new XMLHttpRequest();
+        //编写一个服务器的服务，响应 /clock请求，返回当前时间字符串 监听8080端口
+        xhr.open('GET', 'http://localhost:8080/clock', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('clock').innerHTML = xhr.responseText;
+                send();
+            }
+        }
+        xhr.send();
+    }
+    send();
+</script>
+</body>
+</html>
