@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天窗口</title>
+</head>
+<body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    window.onload = function(){
+        var socket = io.connect('ws://localhost:8080/');
+        //当客户端连接上服务器之后执行回调函数 事件名叫connect
+        socket.on('connect',function(){
+            console.log('连接成功');
+            socket.send('服务器你好');
+        });
+        socket.on('message',function(msg){
+            console.log(msg);
+        });
+    }
+</script>
+
+</body>
+</html>
