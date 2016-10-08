@@ -25,7 +25,7 @@
                   内容:<input type="text" class="form-control">
               </div>
               <div class="col-xs-2">
-                  <button class="btn btn-primary">发言</button>
+                  <button onclick="send()" class="btn btn-primary">发言</button>
               </div>
           </div>
       </div>
@@ -43,7 +43,18 @@
         socket.on('message',function(msg){
             console.log(msg);
         });
+
+        window.send = function(){
+            socket.send({name:'张三',content:'今天天气不错'});
+        }
     }
+    /**
+     * 1. 给按钮绑定事件onclick处理函数
+     * 2. 当处理函数执行时要收集姓名和发言的内容
+     * 3. 把它们组装成一个js对象发送给服务器
+     * 4. 服务器收到消息后把此消息广播给所有的客户端 io.emit('message',{});
+     * 5. 所有的客户端收到消息后把此新消息添加到ul列表里。
+     */
 </script>
 
 </body>
