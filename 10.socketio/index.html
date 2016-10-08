@@ -22,7 +22,7 @@
                   姓名:<input id="name" type="text" class="form-control">
               </div>
               <div class="col-xs-8">
-                  内容:<input id="content" type="text" class="form-control">
+                  内容:<textarea cols="40" rows="10" onkeydown="confirm(event)" id="content"  class="form-control"></textarea>
               </div>
               <div class="col-xs-2">
                   <button onclick="send()" class="btn btn-primary">发言</button>
@@ -60,6 +60,28 @@
             var content = document.querySelector('#content').value;
             socket.send({name:name,content:content});
             document.querySelector('#content').value = '';
+        }
+        var ctrl= false;//全局存放ctrl状态
+        window.confirm = function(event){
+            var code = event.keyCode;//先得到keyCode
+            if(code == 17){//判断code如果是ctrl
+                ctrl = true;//让ctrl状态为true
+                //1秒钟后恢复ctrl状态为false
+                var cancel = setTimeout(function(){
+                    ctrl = false;
+                    clearTimeout(cancel);
+                },1000);
+                return;
+            }
+            if(code == 13){//如果 是回车键
+                if(ctrl){//判断现在的ctrl
+                    var content = document.querySelector('#content');
+                    var oldValue = content.value;
+                    content.value = oldValue+'\n';
+                }else{
+                    window.send();
+                }
+            }
         }
     }
     /**

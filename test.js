@@ -1,17 +1,19 @@
-/*class Events{
- //构造函数定义私有属性
- constructor(){
- this._events = {};
- }
- //注册监听函数
- on(type,fn){
- this._events[type] = fn;
- }
- //发射事件
- emit(type,...params){
- this._events[type].apply(this,params);
- }
- }*/
+class Events {
+    //构造函数定义私有属性
+    constructor() {
+        this._events = {};
+    }
+
+    //注册监听函数
+    on(type, fn) {
+        this._events[type] = fn;
+    }
+
+    //发射事件
+    emit(type, ...params) {
+        this._events[type].apply(this, params);
+    }
+}
 
 function Events() {
     //构造函数里定义私有属性
@@ -28,6 +30,15 @@ Events.prototype.emit = function (type) {
     //var arr =  Array.prototype.slice.call(arguments,1);
     this._events[type].apply(this, arr);
 };
+
+var obj = {
+    a(){
+
+    },
+    b(){
+
+    }
+}
 
 
 var e = new Events();
